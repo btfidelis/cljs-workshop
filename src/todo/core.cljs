@@ -1,41 +1,25 @@
 (ns todo.core
   (:require [goog.dom :as dom]
             [goog.events :as events]
-            [clojure.string :as string]))
+            [secretary.core :as secretary :refer-macros [defroute]])
+  (:import goog.History))
+
 
 (enable-console-print!)
 
 (def app-root (dom/getElement "app"))
-(def app-item-btn (dom/getElement "sendItem"))
-(def app-nitem (dom/getElement "newItem"))
 
-;; https://clojure.org/reference/atoms
-(defonce app-state 
-  (atom {:todos ["Baixar JDK" "Baixar Leiningem"] }))
-
-(defn set-state! [new-state]
-  (swap! app-state conj new-state))
+(defn set-html! [content]
+  (set! (.-innerHTML app-root) content))
 
 
-(defn list-el [list]
-  (str "<ul>" 
-    (string/join "" 
-      (map (fn [x] (str "<li>" x "</li>")) list)) "</ul>"))
 
-(defn render-list []
-  (set! (.-innerHTML app-root) (list-el (:todos @app-state))))
+(secretary/set-config! :prefix "#")
 
-(defn add-item-to-list [e]
-  (set-state! {:todos (conj (:todos @app-state) (.-value app-nitem))}))
+(let [history (History .)]
+  (events/listen history "navigate"
+    (fn [e] 
+      (secretary/dispatch! (.-token e))))
+  (.setEnabled history true))
 
-(add-watch app-state :on-text-change render-list)
-
-(render-list)
-
-(events/listen app-item-btn "click" add-item-to-list)
-
-(defn on-js-reload []
-  ;; optionally touch your app-state to force rerendering depending on
-  ;; your application
-  ;; (swap! app-state update-in [:__figwheel_counter] inc)
-)
+(js/alert "asdajss")
