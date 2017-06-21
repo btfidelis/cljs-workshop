@@ -12,14 +12,17 @@
 (defn set-html! [content]
   (set! (.-innerHTML app-root) content))
 
+(defroute home "/" [] 
+  (set-html! "<h1>Bem vindo!</h1>"))
 
+(defroute perfil "/perfil/:user" [user] 
+  (set-html! (str "<h1> Olá " user "</h1>")))
 
 (secretary/set-config! :prefix "#")
 
-(let [history (History .)]
+(let [history (History.)]
   (events/listen history "navigate"
     (fn [e] 
       (secretary/dispatch! (.-token e))))
   (.setEnabled history true))
 
-(js/alert "asdajss")
