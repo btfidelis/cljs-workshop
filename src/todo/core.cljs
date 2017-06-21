@@ -1,6 +1,8 @@
 (ns todo.core
+  (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [goog.dom :as dom]
             [goog.events :as events]
+            [cljs.core.async :refer [<! put! chan]]
             [secretary.core :as secretary :refer-macros [defroute]])
   (:import goog.History
            goog.Uri
@@ -20,9 +22,10 @@
   ([content el] (set! (.-innerHTML el) content)))
 
 (defn get-from-fixer 
-  [path callback]
-  (let [req (Jsonp. (Uri. (str fixer-uri path)))]
-    (.send req nil callback)))
+  [path]
+  (let [out (chan) 
+        req (Jsonp. (Uri. (str fixer-uri path)))]
+    (.send req nil (fn [res] (put! out res))) out))
 
 (defn render-results [res el]
   (let [results (js->clj res)]
@@ -37,10 +40,10 @@
 
 
 
-(defn render-fix [path] 
-  (let [on-response 
-    (fn [r] (render-results r (dom/getElement "results")))] 
-      (get-from-fixer path on-response)))
+(defn render-fix [path]
+  (go 
+    (let [results (<! (get-from-fixer path))]
+      (render-results results (dom/getElement "results")))))
 
 (defroute home "/" [] 
   (set-html! home-view)
