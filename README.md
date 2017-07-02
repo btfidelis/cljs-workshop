@@ -71,4 +71,11 @@ Essa é a maneira "classica" de fazer as coisas, utilizando callback para execut
 
 Note que na linha 28 do src/core.cljs, utilizamos a função (js->cljs) para converter um JSON em HashMap do clojure. Isso é feito para facilitar a manipução do objeto.
 
- 
+## step 6 - Simple SPA
+
+Aqui mudamos a chamada com callback para utilizar o core.async
+Nele utilizamos a chamado (go ) para executar código async e utilizamos channels para passar a informação dentro de uma chamada async
+
+Links importantes
+
+- http://www.braveclojure.com/core-async/
