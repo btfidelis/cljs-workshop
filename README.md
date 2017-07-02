@@ -64,3 +64,11 @@ $ lein cljsbuild once
 
 Após isso, definimos as rotas dentro do arquivo src/core.cljs
 
+## step 5 - Simple SPA
+
+Neste passo, vamos utilizar jsonp para buscar dados de taxa de intercâmbio de uma api pública.
+Essa é a maneira "classica" de fazer as coisas, utilizando callback para executar o que deseja após terminar a requisição
+
+Note que na linha 28 do src/core.cljs, utilizamos a função (js->cljs) para converter um JSON em HashMap do clojure. Isso é feito para facilitar a manipução do objeto.
+
+ 
