@@ -9,7 +9,6 @@
 (def app-item-btn (dom/getElement "sendItem"))
 (def app-nitem (dom/getElement "newItem"))
 
-;; https://clojure.org/reference/atoms
 (defonce app-state 
   (atom {:todos ["Baixar JDK" "Baixar Leiningem"] }))
 
