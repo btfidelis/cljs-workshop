@@ -42,3 +42,6 @@ Nesse step, vamos utilizar o [atom](https://clojure.org/reference/atoms) para de
 Referencia de funções mais utilizadas
 http://cljs.info/cheatsheet/
 
+## step 3
+
+Para finalizar o TODO, utilizamos a lib goog.events para criar um evento ao cadastrar um todo, adicionar ao state da aplicação
