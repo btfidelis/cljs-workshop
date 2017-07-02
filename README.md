@@ -34,3 +34,11 @@ Também podemos acessar o namespace do módulo e acessar suas funções de vari�
 ```
 
 Utilizar o REPL durante o desenvolvimento é um grande aceleador, você pode rapidamente derefinir funções, testar valores de variávies e testar execução de funções
+
+## step 2
+
+Nesse step, vamos utilizar o [atom](https://clojure.org/reference/atoms) para definir um state para aplicação. Ele funciona como um redux, sendo possível adicionar observers com (add-watch )
+
+Referencia de funções mais utilizadas
+http://cljs.info/cheatsheet/
+

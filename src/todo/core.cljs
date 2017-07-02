@@ -6,7 +6,6 @@
 
 (def app-root (dom/getElement "app"))
 
-;; https://clojure.org/reference/atoms
 (defonce app-state 
   (atom {:todos ["Baixar JDK" "Baixar Leiningem"] }))
 
