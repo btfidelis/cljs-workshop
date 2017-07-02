@@ -79,3 +79,4 @@ Nele utilizamos a chamado (go ) para executar código async e utilizamos channel
 Links importantes
 
 - http://www.braveclojure.com/core-async/
+- http://clojure.com/blog/2013/06/28/clojure-core-async-channels.html
